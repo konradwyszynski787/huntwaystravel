@@ -21,8 +21,8 @@ export default function Footer() {
             <nav className={styles.footerNav}>
               <Link href="/" className={styles.footerLink}>Strona główna</Link>
               <Link href="/formularz" className={styles.footerLink}>Formularz</Link>
-              <Link href="/galeria" className={styles.footerLink}>Galeria</Link>
-              <Link href="/opinie" className={styles.footerLink}>Opinie</Link>
+              {/* <Link href="/galeria" className={styles.footerLink}>Galeria</Link> */}
+              {/* <Link href="/opinie" className={styles.footerLink}>Opinie</Link> */}
             </nav>
           </div>
 

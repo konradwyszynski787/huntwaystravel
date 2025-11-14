@@ -80,7 +80,7 @@ export default function Home() {
         </section>
 
         {/* Gallery Preview */}
-        <section className={`section ${styles.galleryPreview}`}>
+        {/* <section className={`section ${styles.galleryPreview}`}>
           <div className="container">
             <h2 className={styles.sectionTitle}>Nasze podróże</h2>
             <p className={styles.sectionSubtitle}>
@@ -90,7 +90,7 @@ export default function Home() {
               Zobacz galerię →
             </Link>
           </div>
-        </section>
+        </section> */}
       </main>
       <Footer />
     </>

@@ -21,12 +21,12 @@ export default function Header() {
           <Link href="/formularz" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Formularz
           </Link>
-          <Link href="/galeria" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
+          {/* <Link href="/galeria" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Galeria
           </Link>
           <Link href="/opinie" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Opinie
-          </Link>
+          </Link> */}
         </nav>
 
         <button 
