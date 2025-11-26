@@ -5,12 +5,16 @@
 }
 
 :root {
-  --primary-color: #1976d2;
-  --primary-dark: #1565c0;
+  --primary-color: #ff9800;
+  --primary-dark: #f57c00;
+  --primary-light: #ffb74d;
   --secondary-color: #f0f2f5;
   --text-dark: #333;
   --text-light: #666;
   --border-color: #e0e0e0;
+  --logo-orange: #ff9800;
+  --logo-black: #000000;
+  --logo-white: #e0e0e0;
   --shadow: 0 8px 32px rgba(0,0,0,0.18);
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
 }

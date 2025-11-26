@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import styles from './Header.module.css'
 
@@ -11,7 +12,15 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
-          <span className={styles.logoText}>HuntWays Travel</span>
+          <Image 
+            src="/HTP_Logo_Przezroczysta_Szary_napis_Huntways.png" 
+            alt="HuntWays Travel Polska" 
+            width={300} 
+            height={90}
+            priority
+            className={styles.logoImage}
+            style={{ objectFit: 'contain' }}
+          />
         </Link>
         
         <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ''}`}>

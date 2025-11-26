@@ -82,9 +82,119 @@ export default function TravelForm() {
   const [checkedLuggage, setCheckedLuggage] = useState<CheckedLuggage[]>([{ weight: '' }])
   const [beds, setBeds] = useState<Bed[]>([{ type: 'pojedyncze', count: '1', room: '1' }])
   const [multiCity, setMultiCity] = useState<MultiCity[]>([])
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({})
+
+  // Validation functions
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
+
+  const validateStep1 = (): boolean => {
+    const errors: Record<string, string> = {}
+
+    if (!formData.from.trim()) {
+      errors.from = 'Pole "Skąd" jest wymagane'
+    }
+
+    if (!formData.to.trim()) {
+      errors.to = 'Pole "Dokąd" jest wymagane'
+    }
+
+    if (!formData.dateFrom) {
+      errors.dateFrom = 'Data wyjazdu jest wymagana'
+    } else {
+      const dateFrom = new Date(formData.dateFrom)
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      if (dateFrom < today) {
+        errors.dateFrom = 'Data wyjazdu nie może być w przeszłości'
+      }
+    }
+
+    if (formData.tripType === 'roundtrip' && !formData.dateTo) {
+      errors.dateTo = 'Data powrotu jest wymagana dla podróży w obie strony'
+    } else if (formData.tripType === 'roundtrip' && formData.dateFrom && formData.dateTo) {
+      const dateFrom = new Date(formData.dateFrom)
+      const dateTo = new Date(formData.dateTo)
+      if (dateTo <= dateFrom) {
+        errors.dateTo = 'Data powrotu musi być późniejsza niż data wyjazdu'
+      }
+    }
+
+    if (formData.tripType === 'multicity') {
+      if (multiCity.length === 0) {
+        errors.multiCity = 'Dodaj przynajmniej jedno miasto dla podróży Multi City'
+      } else {
+        multiCity.forEach((city, idx) => {
+          if (!city.city.trim()) {
+            errors[`multiCity_${idx}_city`] = 'Nazwa miasta jest wymagana'
+          }
+          if (!city.date) {
+            errors[`multiCity_${idx}_date`] = 'Data jest wymagana'
+          } else if (formData.dateFrom && new Date(city.date) < new Date(formData.dateFrom)) {
+            errors[`multiCity_${idx}_date`] = 'Data miasta nie może być wcześniejsza niż data wyjazdu'
+          }
+        })
+      }
+      if (formData.multiCityReturn && !formData.multiCityReturnDate) {
+        errors.multiCityReturnDate = 'Data powrotu jest wymagana'
+      }
+    }
+
+    const adultsNum = parseInt(formData.adults, 10)
+    if (isNaN(adultsNum) || adultsNum < 1) {
+      errors.adults = 'Musi być przynajmniej 1 dorosły'
+    }
+
+    const childrenNum = parseInt(formData.children, 10)
+    if (isNaN(childrenNum) || childrenNum < 0) {
+      errors.children = 'Liczba dzieci musi być liczbą nieujemną'
+    }
+
+    const infantsNum = parseInt(formData.infants, 10)
+    if (isNaN(infantsNum) || infantsNum < 0) {
+      errors.infants = 'Liczba niemowląt musi być liczbą nieujemną'
+    }
+
+    setValidationErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
+  const validateStep4 = (): boolean => {
+    const errors: Record<string, string> = {}
+
+    if (!formData.budget || parseFloat(formData.budget) <= 0) {
+      errors.budget = 'Budżet musi być większy od zera'
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = 'Adres e-mail jest wymagany'
+    } else if (!validateEmail(formData.email)) {
+      errors.email = 'Podaj prawidłowy adres e-mail'
+    }
+
+    setValidationErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
+  const validateAll = (): boolean => {
+    const step1Valid = validateStep1()
+    const step4Valid = validateStep4()
+    return step1Valid && step4Valid
+  }
 
   const nextStep = (step: number) => {
-    if (step < totalSteps) {
+    let isValid = true
+
+    if (step === 1) {
+      isValid = validateStep1()
+    } else if (step === 4) {
+      isValid = validateStep4()
+    }
+
+    if (isValid && step < totalSteps) {
+      setValidationErrors({})
       setCurrentStep(step + 1)
       if (step + 1 === 5) {
         // Summary step
@@ -105,6 +215,13 @@ export default function TravelForm() {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitError(null)
+
+    // Validate all steps before submitting
+    if (!validateAll()) {
+      setIsSubmitting(false)
+      setCurrentStep(1) // Go back to first step with errors
+      return
+    }
 
     try {
       // Przygotowanie danych do wysyłki
@@ -300,42 +417,94 @@ export default function TravelForm() {
 
           <div className={styles.formRow}>
             <label>Skąd (wylot):</label>
-            <input 
-              value={formData.from}
-              onChange={(e) => setFormData({...formData, from: e.target.value})}
-              required 
-              placeholder="Wpisz miasto lub nazwę miejsca"
-            />
+            <div className={styles.inputWrapper}>
+              <input 
+                value={formData.from}
+                onChange={(e) => {
+                  setFormData({...formData, from: e.target.value})
+                  if (validationErrors.from) {
+                    const newErrors = { ...validationErrors }
+                    delete newErrors.from
+                    setValidationErrors(newErrors)
+                  }
+                }}
+                required 
+                placeholder="Wpisz miasto lub nazwę miejsca"
+                className={validationErrors.from ? styles.inputError : ''}
+              />
+              {validationErrors.from && (
+                <span className={styles.errorMessage}>{validationErrors.from}</span>
+              )}
+            </div>
           </div>
 
           <div className={styles.formRow}>
             <label>Dokąd (przylot):</label>
-            <input 
-              value={formData.to}
-              onChange={(e) => setFormData({...formData, to: e.target.value})}
-              required 
-              placeholder="Wpisz miasto lub nazwę miejsca"
-            />
+            <div className={styles.inputWrapper}>
+              <input 
+                value={formData.to}
+                onChange={(e) => {
+                  setFormData({...formData, to: e.target.value})
+                  if (validationErrors.to) {
+                    const newErrors = { ...validationErrors }
+                    delete newErrors.to
+                    setValidationErrors(newErrors)
+                  }
+                }}
+                required 
+                placeholder="Wpisz miasto lub nazwę miejsca"
+                className={validationErrors.to ? styles.inputError : ''}
+              />
+              {validationErrors.to && (
+                <span className={styles.errorMessage}>{validationErrors.to}</span>
+              )}
+            </div>
           </div>
 
           <div className={styles.formRow}>
             <label>Data wyjazdu:</label>
-            <input 
-              type="date" 
-              value={formData.dateFrom}
-              onChange={(e) => setFormData({...formData, dateFrom: e.target.value})}
-              required
-            />
+            <div className={styles.inputWrapper}>
+              <input 
+                type="date" 
+                value={formData.dateFrom}
+                onChange={(e) => {
+                  setFormData({...formData, dateFrom: e.target.value})
+                  if (validationErrors.dateFrom) {
+                    const newErrors = { ...validationErrors }
+                    delete newErrors.dateFrom
+                    setValidationErrors(newErrors)
+                  }
+                }}
+                required
+                className={validationErrors.dateFrom ? styles.inputError : ''}
+              />
+              {validationErrors.dateFrom && (
+                <span className={styles.errorMessage}>{validationErrors.dateFrom}</span>
+              )}
+            </div>
           </div>
 
           {formData.tripType === 'roundtrip' && (
             <div className={styles.formRow}>
               <label>Data powrotu:</label>
-              <input 
-                type="date" 
-                value={formData.dateTo}
-                onChange={(e) => setFormData({...formData, dateTo: e.target.value})}
-              />
+              <div className={styles.inputWrapper}>
+                <input 
+                  type="date" 
+                  value={formData.dateTo}
+                  onChange={(e) => {
+                    setFormData({...formData, dateTo: e.target.value})
+                    if (validationErrors.dateTo) {
+                      const newErrors = { ...validationErrors }
+                      delete newErrors.dateTo
+                      setValidationErrors(newErrors)
+                    }
+                  }}
+                  className={validationErrors.dateTo ? styles.inputError : ''}
+                />
+                {validationErrors.dateTo && (
+                  <span className={styles.errorMessage}>{validationErrors.dateTo}</span>
+                )}
+              </div>
             </div>
           )}
 
@@ -343,44 +512,73 @@ export default function TravelForm() {
             <div className={styles.multiCityOptions}>
               <div className={styles.formRow}>
                 <label>Miasta Multi City:</label>
-                <div className={styles.multiCityContainer}>
-                  {multiCity.map((item, idx) => (
-                    <div key={idx} className={styles.luggageRow}>
-                      <input 
-                        type="text" 
-                        value={item.city}
-                        onChange={(e) => {
-                          const newMultiCity = [...multiCity]
-                          newMultiCity[idx].city = e.target.value
-                          setMultiCity(newMultiCity)
-                        }}
-                        placeholder="Nazwa miasta"
-                      />
-                      <input 
-                        type="date" 
-                        value={item.date}
-                        onChange={(e) => {
-                          const newMultiCity = [...multiCity]
-                          newMultiCity[idx].date = e.target.value
-                          setMultiCity(newMultiCity)
-                        }}
-                      />
-                      <button 
-                        type="button" 
-                        className={styles.removeBtn}
-                        onClick={() => setMultiCity(multiCity.filter((_, i) => i !== idx))}
-                      >
-                        &minus;
-                      </button>
-                    </div>
-                  ))}
-                  <button 
-                    type="button" 
-                    onClick={() => setMultiCity([...multiCity, { city: '', date: '' }])}
-                    className={styles.addButton}
-                  >
-                    + Dodaj miasto
-                  </button>
+                <div className={styles.inputWrapper}>
+                  <div className={styles.multiCityContainer}>
+                    {multiCity.map((item, idx) => (
+                      <div key={idx} className={styles.luggageRow}>
+                        <div className={styles.inputWrapper}>
+                          <input 
+                            type="text" 
+                            value={item.city}
+                            onChange={(e) => {
+                              const newMultiCity = [...multiCity]
+                              newMultiCity[idx].city = e.target.value
+                              setMultiCity(newMultiCity)
+                              const errorKey = `multiCity_${idx}_city`
+                              if (validationErrors[errorKey]) {
+                                const newErrors = { ...validationErrors }
+                                delete newErrors[errorKey]
+                                setValidationErrors(newErrors)
+                              }
+                            }}
+                            placeholder="Nazwa miasta"
+                            className={validationErrors[`multiCity_${idx}_city`] ? styles.inputError : ''}
+                          />
+                          {validationErrors[`multiCity_${idx}_city`] && (
+                            <span className={styles.errorMessage}>{validationErrors[`multiCity_${idx}_city`]}</span>
+                          )}
+                        </div>
+                        <div className={styles.inputWrapper}>
+                          <input 
+                            type="date" 
+                            value={item.date}
+                            onChange={(e) => {
+                              const newMultiCity = [...multiCity]
+                              newMultiCity[idx].date = e.target.value
+                              setMultiCity(newMultiCity)
+                              const errorKey = `multiCity_${idx}_date`
+                              if (validationErrors[errorKey]) {
+                                const newErrors = { ...validationErrors }
+                                delete newErrors[errorKey]
+                                setValidationErrors(newErrors)
+                              }
+                            }}
+                            className={validationErrors[`multiCity_${idx}_date`] ? styles.inputError : ''}
+                          />
+                          {validationErrors[`multiCity_${idx}_date`] && (
+                            <span className={styles.errorMessage}>{validationErrors[`multiCity_${idx}_date`]}</span>
+                          )}
+                        </div>
+                        <button 
+                          type="button" 
+                          className={styles.removeBtn}
+                          onClick={() => setMultiCity(multiCity.filter((_, i) => i !== idx))}
+                        >
+                          &minus;
+                        </button>
+                      </div>
+                    ))}
+                    <button 
+                      type="button" 
+                      onClick={() => setMultiCity([...multiCity, { city: '', date: '' }])}
+                      className={styles.addButton}
+                    >
+                      + Dodaj miasto
+                    </button>
+                  </div>
+                  {validationErrors.multiCity && (
+                    <span className={styles.errorMessage}>{validationErrors.multiCity}</span>
+                  )}
                 </div>
               </div>
               
@@ -396,11 +594,24 @@ export default function TravelForm() {
               {formData.multiCityReturn && (
                 <div className={styles.formRow}>
                   <label>Data powrotu:</label>
-                  <input 
-                    type="date" 
-                    value={formData.multiCityReturnDate}
-                    onChange={(e) => setFormData({...formData, multiCityReturnDate: e.target.value})}
-                  />
+                  <div className={styles.inputWrapper}>
+                    <input 
+                      type="date" 
+                      value={formData.multiCityReturnDate}
+                      onChange={(e) => {
+                        setFormData({...formData, multiCityReturnDate: e.target.value})
+                        if (validationErrors.multiCityReturnDate) {
+                          const newErrors = { ...validationErrors }
+                          delete newErrors.multiCityReturnDate
+                          setValidationErrors(newErrors)
+                        }
+                      }}
+                      className={validationErrors.multiCityReturnDate ? styles.inputError : ''}
+                    />
+                    {validationErrors.multiCityReturnDate && (
+                      <span className={styles.errorMessage}>{validationErrors.multiCityReturnDate}</span>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
@@ -408,37 +619,72 @@ export default function TravelForm() {
 
           <div className={styles.formRow}>
             <label style={{ flex: 1 }}>Ilość osób:</label>
-            <div className={styles.personsContainer}>
-              <div className={styles.personInput}>
-                <span>Dorośli</span>
-                <input 
-                  type="number" 
-                  min="1" 
-                  max="10" 
-                  value={formData.adults}
-                  onChange={(e) => setFormData({...formData, adults: e.target.value})}
-                  required
-                />
-              </div>
-              <div className={styles.personInput}>
-                <span>Dzieci</span>
-                <input 
-                  type="number" 
-                  min="0" 
-                  max="10" 
-                  value={formData.children}
-                  onChange={(e) => setFormData({...formData, children: e.target.value})}
-                />
-              </div>
-              <div className={styles.personInput}>
-                <span>Niemowlęta</span>
-                <input 
-                  type="number" 
-                  min="0" 
-                  max="10" 
-                  value={formData.infants}
-                  onChange={(e) => setFormData({...formData, infants: e.target.value})}
-                />
+            <div className={styles.inputWrapper}>
+              <div className={styles.personsContainer}>
+                <div className={styles.personInput}>
+                  <span>Dorośli</span>
+                  <input 
+                    type="number" 
+                    min="1" 
+                    max="10" 
+                    value={formData.adults}
+                    onChange={(e) => {
+                      setFormData({...formData, adults: e.target.value})
+                      if (validationErrors.adults) {
+                        const newErrors = { ...validationErrors }
+                        delete newErrors.adults
+                        setValidationErrors(newErrors)
+                      }
+                    }}
+                    required
+                    className={validationErrors.adults ? styles.inputError : ''}
+                  />
+                  {validationErrors.adults && (
+                    <span className={styles.errorMessage}>{validationErrors.adults}</span>
+                  )}
+                </div>
+                <div className={styles.personInput}>
+                  <span>Dzieci</span>
+                  <input 
+                    type="number" 
+                    min="0" 
+                    max="10" 
+                    value={formData.children}
+                    onChange={(e) => {
+                      setFormData({...formData, children: e.target.value})
+                      if (validationErrors.children) {
+                        const newErrors = { ...validationErrors }
+                        delete newErrors.children
+                        setValidationErrors(newErrors)
+                      }
+                    }}
+                    className={validationErrors.children ? styles.inputError : ''}
+                  />
+                  {validationErrors.children && (
+                    <span className={styles.errorMessage}>{validationErrors.children}</span>
+                  )}
+                </div>
+                <div className={styles.personInput}>
+                  <span>Niemowlęta</span>
+                  <input 
+                    type="number" 
+                    min="0" 
+                    max="10" 
+                    value={formData.infants}
+                    onChange={(e) => {
+                      setFormData({...formData, infants: e.target.value})
+                      if (validationErrors.infants) {
+                        const newErrors = { ...validationErrors }
+                        delete newErrors.infants
+                        setValidationErrors(newErrors)
+                      }
+                    }}
+                    className={validationErrors.infants ? styles.inputError : ''}
+                  />
+                  {validationErrors.infants && (
+                    <span className={styles.errorMessage}>{validationErrors.infants}</span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -923,34 +1169,60 @@ export default function TravelForm() {
 
           <div className={styles.formRow}>
             <label>Podaj budżet jakim dysponujesz:</label>
-            <div className={styles.budgetContainer}>
-              <input 
-                type="number" 
-                min="0" 
-                value={formData.budget}
-                onChange={(e) => setFormData({...formData, budget: e.target.value})}
-                required
-              />
-              <select 
-                value={formData.currency}
-                onChange={(e) => setFormData({...formData, currency: e.target.value})}
-              >
-                <option value="PLN">PLN</option>
-                <option value="EUR">EUR</option>
-                <option value="USD">USD</option>
-                <option value="GBP">GBP</option>
-              </select>
+            <div className={styles.inputWrapper}>
+              <div className={styles.budgetContainer}>
+                <input 
+                  type="number" 
+                  min="0" 
+                  value={formData.budget}
+                  onChange={(e) => {
+                    setFormData({...formData, budget: e.target.value})
+                    if (validationErrors.budget) {
+                      const newErrors = { ...validationErrors }
+                      delete newErrors.budget
+                      setValidationErrors(newErrors)
+                    }
+                  }}
+                  required
+                  className={validationErrors.budget ? styles.inputError : ''}
+                />
+                <select 
+                  value={formData.currency}
+                  onChange={(e) => setFormData({...formData, currency: e.target.value})}
+                >
+                  <option value="PLN">PLN</option>
+                  <option value="EUR">EUR</option>
+                  <option value="USD">USD</option>
+                  <option value="GBP">GBP</option>
+                </select>
+              </div>
+              {validationErrors.budget && (
+                <span className={styles.errorMessage}>{validationErrors.budget}</span>
+              )}
             </div>
           </div>
 
           <div className={styles.formRow}>
             <label>Podaj swój adres e-mail:</label>
-            <input 
-              type="email" 
-              value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
-              required
-            />
+            <div className={styles.inputWrapper}>
+              <input 
+                type="email" 
+                value={formData.email}
+                onChange={(e) => {
+                  setFormData({...formData, email: e.target.value})
+                  if (validationErrors.email) {
+                    const newErrors = { ...validationErrors }
+                    delete newErrors.email
+                    setValidationErrors(newErrors)
+                  }
+                }}
+                required
+                className={validationErrors.email ? styles.inputError : ''}
+              />
+              {validationErrors.email && (
+                <span className={styles.errorMessage}>{validationErrors.email}</span>
+              )}
+            </div>
           </div>
 
           <div className={styles.actions}>

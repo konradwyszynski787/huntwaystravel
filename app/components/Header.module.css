@@ -13,25 +13,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 70px;
+  height: 100px;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--primary-color);
+  display: flex;
+  align-items: center;
   transition: opacity 0.2s;
+  height: 90px;
 }
 
 .logo:hover {
   opacity: 0.8;
 }
 
-.logoText {
-  background: linear-gradient(135deg, var(--primary-color), #42a5f5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.logoImage {
+  height: auto;
+  width: auto;
+  max-height: 90px;
+  max-width: 300px;
+  object-fit: contain;
 }
 
 .nav {
@@ -86,6 +87,19 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    height: 80px;
+  }
+
+  .logo {
+    height: 70px;
+  }
+
+  .logoImage {
+    max-height: 70px;
+    max-width: 200px;
+  }
+
   .menuButton {
     display: flex;
   }

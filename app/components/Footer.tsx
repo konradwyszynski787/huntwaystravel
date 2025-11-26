@@ -10,7 +10,7 @@ export default function Footer() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.section}>
-            <h3 className={styles.title}>HuntWays Travel</h3>
+            <h3 className={styles.title}>Huntways Travel</h3>
             <p className={styles.description}>
               Twój kreator wymarzonych podróży. Planujemy, rezerwujemy, realizujemy.
             </p>
@@ -33,7 +33,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <p>&copy; {new Date().getFullYear()} HuntWays Travel. Wszelkie prawa zastrzeżone.</p>
+          <p>&copy; {new Date().getFullYear()} Huntways Travel. Wszelkie prawa zastrzeżone.</p>
         </div>
       </div>
     </footer>
