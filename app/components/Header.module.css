@@ -13,14 +13,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 70px;
+  height: 100px;
 }
 
 .logo {
   display: flex;
   align-items: center;
   transition: opacity 0.2s;
-  height: 60px;
+  height: 90px;
 }
 
 .logo:hover {
@@ -30,7 +30,8 @@
 .logoImage {
   height: auto;
   width: auto;
-  max-height: 60px;
+  max-height: 90px;
+  max-width: 300px;
   object-fit: contain;
 }
 
@@ -86,6 +87,19 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    height: 80px;
+  }
+
+  .logo {
+    height: 70px;
+  }
+
+  .logoImage {
+    max-height: 70px;
+    max-width: 200px;
+  }
+
   .menuButton {
     display: flex;
   }

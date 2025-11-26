@@ -11,7 +11,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.heroContent}>
-            <h1 className={styles.heroTitle}>HuntWays Travel</h1>
+            <h1 className={styles.heroTitle}>Huntways Travel</h1>
             <p className={styles.heroSubtitle}>
               Zaplanuj swoją wymarzoną podróż w kilka prostych kroków
             </p>
@@ -24,7 +24,7 @@ export default function Home() {
         {/* Features Section */}
         <section className={`section ${styles.features}`}>
           <div className="container">
-            <h2 className={styles.sectionTitle}>Dlaczego HuntWays Travel?</h2>
+            <h2 className={styles.sectionTitle}>Dlaczego Huntways Travel?</h2>
             <div className={styles.featuresGrid}>
               <div className={styles.featureCard}>
                 <div className={styles.featureIcon}>✈️</div>

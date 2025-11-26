@@ -4,7 +4,10 @@
 
 .card {
   width: 100%;
-  min-height: 520px;
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: 600px;
+  max-height: 90vh;
   background: #fff;
   border-radius: 18px;
   box-shadow: var(--shadow);
@@ -12,6 +15,9 @@
   padding: 40px;
   box-sizing: border-box;
   animation: fadeIn 0.4s ease-out;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 @keyframes fadeIn {
@@ -27,11 +33,12 @@
 
 .progressBar {
   width: 100%;
-  height: 6px;
+  height: 8px;
   background: var(--secondary-color);
   border-radius: 10px;
   margin-bottom: 30px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .progressFill {
@@ -47,6 +54,7 @@
   justify-content: space-between;
   margin-bottom: 40px;
   position: relative;
+  flex-shrink: 0;
 }
 
 .stepIndicator::before {
@@ -88,7 +96,7 @@
   background: var(--primary-color);
   color: #fff;
   border-color: var(--primary-color);
-  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
   transform: scale(1.1);
 }
 
@@ -116,10 +124,33 @@
   flex-direction: column;
   gap: 24px;
   animation: slideIn 0.3s ease-out;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-right: -10px;
 }
 
 .step.active {
   display: flex;
+}
+
+/* Scrollbar styling */
+.step::-webkit-scrollbar {
+  width: 8px;
+}
+
+.step::-webkit-scrollbar-track {
+  background: var(--secondary-color);
+  border-radius: 4px;
+}
+
+.step::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+.step::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
 }
 
 @keyframes slideIn {
@@ -136,19 +167,20 @@
 .stepTitle {
   font-size: 1.5em;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 24px;
   color: var(--text-dark);
   background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  flex-shrink: 0;
 }
 
 .formRow {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .formRow label {
@@ -511,9 +543,14 @@
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 32px;
+  margin-top: auto;
   padding-top: 24px;
   border-top: 2px solid var(--secondary-color);
+  flex-shrink: 0;
+  background: #fff;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
 }
 
 .actions button {
@@ -525,6 +562,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: inherit;
+  min-width: 120px;
 }
 
 .actions button[type="button"] {
@@ -540,14 +578,14 @@
 }
 
 .actions button[type="submit"] {
-  background: linear-gradient(135deg, var(--primary-color), #42a5f5);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
   color: #fff;
-  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
 }
 
 .actions button[type="submit"]:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(25, 118, 210, 0.4);
+  box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
 }
 
 .actions button:disabled {
@@ -718,6 +756,8 @@
 @media (max-width: 768px) {
   .card {
     padding: 24px 20px;
+    max-height: 95vh;
+    min-height: 500px;
   }
 
   .stepIndicator {

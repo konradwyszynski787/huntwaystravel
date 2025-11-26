@@ -15,8 +15,8 @@ export default function Header() {
           <Image 
             src="/HTP_Logo_Przezroczysta_Szary_napis_Huntways.png" 
             alt="HuntWays Travel Polska" 
-            width={200} 
-            height={120}
+            width={300} 
+            height={90}
             priority
             className={styles.logoImage}
             style={{ objectFit: 'contain' }}
