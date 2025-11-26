@@ -17,21 +17,21 @@
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--primary-color);
+  display: flex;
+  align-items: center;
   transition: opacity 0.2s;
+  height: 60px;
 }
 
 .logo:hover {
   opacity: 0.8;
 }
 
-.logoText {
-  background: linear-gradient(135deg, var(--primary-color), #42a5f5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.logoImage {
+  height: auto;
+  width: auto;
+  max-height: 60px;
+  object-fit: contain;
 }
 
 .nav {
