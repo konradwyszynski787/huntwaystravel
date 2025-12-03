@@ -78,33 +78,31 @@ export async function POST(request: NextRequest) {
 
     console.log("Email wysłany do administratorów (SMTP):", adminEmails.join(", "));
 
-    // Opcjonalny mail potwierdzający do klienta
-    if (process.env.SEND_CONFIRMATION === "true") {
-      const confirmationHtml = `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #ff9800; margin-bottom: 16px;">Dziękujemy za zgłoszenie!</h2>
-          <p style="margin: 0 0 16px;">Otrzymaliśmy Twoje zgłoszenie dotyczące planowania podróży. Skontaktujemy się z Tobą wkrótce z najlepszą ofertą.</p>
-          <p style="margin: 0 0 12px;">Szczegóły Twojego zgłoszenia:</p>
-          <div style="background: #f5f5f5; padding: 20px; border-radius: 12px; margin: 20px 0;">
-            ${adminHtml}
-          </div>
-          <p style="margin-top: 30px; color: #666; font-size: 14px;">
-            Pozdrawiamy,<br/>
-            Zespół HuntWays Travel
-          </p>
-        </div>
-      `;
+   // Mail potwierdzający zawsze wysyłany do klienta
+const confirmationHtml = `
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+  <h2 style="color: #ff9800; margin-bottom: 16px;">Dziękujemy za zgłoszenie!</h2>
+  <p style="margin: 0 0 16px;">Otrzymaliśmy Twoje zgłoszenie dotyczące planowania podróży. Skontaktujemy się z Tobą wkrótce z najlepszą ofertą.</p>
+  <p style="margin: 0 0 12px;">Szczegóły Twojego zgłoszenia:</p>
+  <div style="background: #f5f5f5; padding: 20px; border-radius: 12px; margin: 20px 0;">
+    ${adminHtml}
+  </div>
+  <p style="margin-top: 30px; color: #666; font-size: 14px;">
+    Pozdrawiamy,<br/>
+    Zespół HuntWays Travel
+  </p>
+</div>
+`;
 
-      await transporter.sendMail({
-        from: fromAddress,
-        to: clientEmail,
-        subject: "Potwierdzenie otrzymania zgłoszenia - HuntWays Travel",
-        html: confirmationHtml,
-        text: `Dziękujemy za zgłoszenie! Otrzymaliśmy Twoje dane i wkrótce wrócimy z ofertą.\n\n${adminText}`,
-      });
+await transporter.sendMail({
+from: fromAddress,
+to: clientEmail,
+subject: "Potwierdzenie otrzymania zgłoszenia - HuntWays Travel",
+html: confirmationHtml,
+text: `Dziękujemy za zgłoszenie! Otrzymaliśmy Twoje dane i wkrótce wrócimy z ofertą.\n\n${adminText}`,
+});
 
-      console.log("Email potwierdzający wysłany do klienta (SMTP):", clientEmail);
-    }
+console.log("Email potwierdzający wysłany do klienta (SMTP):", clientEmail);
 
     return NextResponse.json(
       { message: "Formularz został wysłany pomyślnie" },

@@ -16,8 +16,8 @@ export default function Home() {
             <div className={styles.heroTitle}> <Image 
             src="/HTP_Logo_Strona_Internetowa.png" 
             alt="HuntWays Travel Polska" 
-            width={300} 
-            height={90}
+            width={400} 
+            height={110}
             priority
             className={styles.logoImage}
             style={{ objectFit: 'contain' }}
