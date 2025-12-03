@@ -13,7 +13,7 @@ export default function Header() {
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
           <Image 
-            src="/HTP_Logo_Przezroczysta_Szary_napis_Huntways.png" 
+            src="/HTP_Logo_Strona_Internetowa.png" 
             alt="HuntWays Travel Polska" 
             width={300} 
             height={90}
@@ -27,15 +27,21 @@ export default function Header() {
           <Link href="/" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Strona główna
           </Link>
+          <Link href="/pakiety" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
+            Pakiety
+          </Link>
           <Link href="/formularz" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Formularz
           </Link>
-          {/* <Link href="/galeria" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
+          <Link href="/o-nas" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
+            O nas
+          </Link>
+          <Link href="/galeria" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Galeria
           </Link>
           <Link href="/opinie" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Opinie
-          </Link> */}
+          </Link>
         </nav>
 
         <button 

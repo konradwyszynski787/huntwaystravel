@@ -242,7 +242,22 @@ export default function TravelForm() {
         body: JSON.stringify(submitData),
       })
 
-      const result = await response.json()
+      // Bezpieczne parsowanie odpowiedzi – API zawsze powinno zwracać JSON,
+      // ale jeśli z jakiegoś powodu zwróci HTML/tekst, nie wywali całej aplikacji
+      let result: any = null
+      let rawText: string | null = null
+      try {
+        rawText = await response.text()
+        result = rawText ? JSON.parse(rawText) : null
+      } catch (parseError) {
+        console.error('Nieprawidłowa odpowiedź z API /api/submit-form:', {
+          rawText,
+          parseError,
+        })
+        throw new Error(
+          'Serwer zwrócił nieprawidłową odpowiedź. Spróbuj ponownie za chwilę lub skontaktuj się z nami bezpośrednio.'
+        )
+      }
 
       if (!response.ok) {
         // Wyświetl szczegółowy komunikat błędu z API

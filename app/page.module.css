@@ -1,10 +1,14 @@
 .hero {
   background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  background-image: url('/Brooklyn_Bridge_v2.png');
   color: #fff;
   padding: 120px 20px;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background-size: cover;
+  background-position: 95% 25%;
+  background-repeat: no-repeat;
 }
 
 .hero::before {
@@ -56,9 +60,55 @@
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-.features {
+.heroTiles {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 60px auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.heroTile {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heroTile:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   background: #fff;
 }
+
+.tileIcon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.heroTile h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+
+.heroTile p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
 
 .sectionTitle {
   font-size: 2.5rem;
@@ -104,6 +154,10 @@
 
 .howItWorks {
   background: var(--secondary-color);
+}
+
+.howItWorksPackages {
+  background: #fff;
 }
 
 .steps {
@@ -171,6 +225,21 @@
   background: var(--primary-dark);
 }
 
+.page_ctaButton__lcwUc {
+  color: #fff;
+  background: var(--primary-color)!important;
+}
+
+.howItWorksPackages .ctaButton {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.howItWorksPackages .ctaButton:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 10px 25px rgba(255, 152, 0, 0.3);
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -184,7 +253,7 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 80px 20px;
+    padding: 80px 20px 40px;
   }
 
   .heroTitle {
@@ -202,6 +271,29 @@
   .featuresGrid,
   .steps {
     grid-template-columns: 1fr;
+  }
+
+  .heroTiles {
+    margin-top: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .heroTile {
+    padding: 20px 15px;
+  }
+
+  .tileIcon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+
+  .heroTile h3 {
+    font-size: 1.1rem;
+  }
+
+  .heroTile p {
+    font-size: 0.85rem;
   }
 }
 
