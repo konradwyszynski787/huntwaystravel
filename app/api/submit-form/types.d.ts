@@ -57,6 +57,7 @@ export interface HandLuggage {
 }
 
 export interface CheckedLuggage {
+  count: string
   weight: string
 }
 

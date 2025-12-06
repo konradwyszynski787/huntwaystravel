@@ -3,6 +3,7 @@ import Footer from './components/Footer'
 import Link from 'next/link'
 import styles from './page.module.css'
 import Image from 'next/image'
+import { FileText, Briefcase, Info, Star } from "lucide-react";
 
 export default function Home() {
   return (
@@ -31,28 +32,28 @@ export default function Home() {
           {/* Quick Navigation Tiles */}
           <div className={styles.heroTiles}>
             <a href="#jak-to-dziala-formularz" className={styles.heroTile}>
-              <div className={styles.tileIcon}>📝</div>
+            <div className={styles.tileIcon}><FileText size={64} /></div>
               <h3>Formularz</h3>
               <p>Zaplanuj podróż</p>
             </a>
             <a href="#jak-to-dziala-pakiety" className={styles.heroTile}>
-              <div className={styles.tileIcon}>🎒</div>
+            <div className={styles.tileIcon}><Briefcase size={64} /></div>
               <h3>Pakiety</h3>
               <p>Gotowe wycieczki</p>
             </a>
             <Link href="/o-nas" className={styles.heroTile}>
-              <div className={styles.tileIcon}>ℹ️</div>
+            <div className={styles.tileIcon}><Info size={64} /></div>
               <h3>O nas</h3>
               <p>Poznaj nas</p>
             </Link>
             <Link href="/opinie" className={styles.heroTile}>
-              <div className={styles.tileIcon}>⭐</div>
+            <div className={styles.tileIcon}><Star size={64} /></div>
               <h3>Opinie</h3>
               <p>Co mówią klienci</p>
             </Link>
           </div>
         </section>
-
+<section className={styles.backgroundImage}>
         {/* How It Works - Formularz */}
         <section id="jak-to-dziala-formularz" className={`section ${styles.howItWorks}`}>
           <div className="container">
@@ -110,7 +111,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-
+        </section>
         {/* Gallery Preview */}
         {/* <section className={`section ${styles.galleryPreview}`}>
           <div className="container">

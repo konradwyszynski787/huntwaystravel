@@ -165,8 +165,8 @@ function generateSummaryHTML(formData: FormData): string {
     );
 
   const checkedLuggage = (formData.checkedLuggage || [])
-    .filter((item: CheckedLuggage) => item.weight)
-    .map((item) => `Walizka ${item.weight} kg`);
+    .filter((item: CheckedLuggage) => item.weight && item.count && Number(item.count) > 0)
+    .map((item) => `${item.count} szt. x ${item.weight} kg`);
 
   const beds = (formData.beds || [])
     .filter((bed: Bed) => Number(bed.count) > 0)
@@ -300,8 +300,8 @@ function generateSummaryPlainText(formData: FormData): string {
   );
 
   const checkedLuggage = (formData.checkedLuggage || [])
-    .filter((item: CheckedLuggage) => item.weight)
-    .map((item) => `Walizka ${item.weight} kg`);
+    .filter((item: CheckedLuggage) => item.weight && item.count && Number(item.count) > 0)
+    .map((item) => `${item.count} szt. x ${item.weight} kg`);
   lines.push(
     `Bagaż rejestrowany: ${
       checkedLuggage.length ? checkedLuggage.join(", ") : "Brak"
