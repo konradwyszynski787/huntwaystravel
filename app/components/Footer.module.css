@@ -220,3 +220,7 @@
     gap: 30px;
   }
 }
+
+.descriptionBold {
+  font-weight: bold;
+}

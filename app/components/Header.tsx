@@ -13,7 +13,7 @@ export default function Header() {
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
           <Image 
-            src="/HTP_Logo_Strona_Internetowa.png" 
+            src="/HTP Logo Strona Internetowa.png" 
             alt="HuntWays Travel Polska" 
             width={300} 
             height={90}
