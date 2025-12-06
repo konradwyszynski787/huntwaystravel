@@ -1,0 +1,153 @@
+.main {
+  min-height: calc(100vh - 140px);
+  padding: 40px 20px;
+  background: var(--secondary-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text-light);
+  margin-bottom: 50px;
+  font-size: 1.1rem;
+}
+
+.aboutSection {
+  background: #fff;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 50px;
+}
+
+.aboutContent h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--text-dark);
+}
+
+.aboutContent p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.aboutContent p:last-child {
+  margin-bottom: 0;
+}
+
+.features {
+  background: #fff;
+  padding: 50px 40px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 50px;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 50px;
+  color: var(--text-dark);
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.featureCard {
+  text-align: center;
+  padding: 30px;
+  background: var(--secondary-color);
+  border-radius: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-sm);
+}
+
+.featureIcon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.featureCard h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.featureCard p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.missionSection {
+  background: #fff;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.missionText {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--text-light);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+
+  .aboutSection,
+  .features,
+  .missionSection {
+    padding: 24px 20px;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .aboutContent h2 {
+    font-size: 1.5rem;
+  }
+
+  .aboutContent p {
+    font-size: 1rem;
+  }
+
+  .missionText {
+    font-size: 1rem;
+  }
+}
+

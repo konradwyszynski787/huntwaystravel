@@ -9,6 +9,7 @@ interface HandLuggage {
 }
 
 interface CheckedLuggage {
+  count: string
   weight: string
 }
 
@@ -79,7 +80,7 @@ export default function TravelForm() {
     { type: 'plecak', count: '0' },
     { type: 'walizka', count: '0' },
   ])
-  const [checkedLuggage, setCheckedLuggage] = useState<CheckedLuggage[]>([{ weight: '' }])
+  const [checkedLuggage, setCheckedLuggage] = useState<CheckedLuggage[]>([{ count: '1', weight: '' }])
   const [beds, setBeds] = useState<Bed[]>([{ type: 'pojedyncze', count: '1', room: '1' }])
   const [multiCity, setMultiCity] = useState<MultiCity[]>([])
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({})
@@ -242,7 +243,22 @@ export default function TravelForm() {
         body: JSON.stringify(submitData),
       })
 
-      const result = await response.json()
+      // Bezpieczne parsowanie odpowiedzi – API zawsze powinno zwracać JSON,
+      // ale jeśli z jakiegoś powodu zwróci HTML/tekst, nie wywali całej aplikacji
+      let result: any = null
+      let rawText: string | null = null
+      try {
+        rawText = await response.text()
+        result = rawText ? JSON.parse(rawText) : null
+      } catch (parseError) {
+        console.error('Nieprawidłowa odpowiedź z API /api/submit-form:', {
+          rawText,
+          parseError,
+        })
+        throw new Error(
+          'Serwer zwrócił nieprawidłową odpowiedź. Spróbuj ponownie za chwilę lub skontaktuj się z nami bezpośrednio.'
+        )
+      }
 
       if (!response.ok) {
         // Wyświetl szczegółowy komunikat błędu z API
@@ -287,8 +303,8 @@ export default function TravelForm() {
     })
 
     checkedLuggage.forEach(item => {
-      if (item.weight) {
-        lines.push(`Bagaż rejestrowany: Walizka ${item.weight}kg`)
+      if (item.weight && item.count && parseInt(item.count) > 0) {
+        lines.push(`Bagaż rejestrowany: ${item.count} szt. x ${item.weight}kg`)
       }
     })
 
@@ -761,6 +777,19 @@ export default function TravelForm() {
                   <input 
                     type="number" 
                     min="1" 
+                    max="20" 
+                    value={item.count}
+                    onChange={(e) => {
+                      const newLuggage = [...checkedLuggage]
+                      newLuggage[idx].count = e.target.value
+                      setCheckedLuggage(newLuggage)
+                    }}
+                    placeholder="Ilość sztuk"
+                    style={{ width: '100px' }}
+                  />
+                  <input 
+                    type="number" 
+                    min="1" 
                     max="50" 
                     value={item.weight}
                     onChange={(e) => {
@@ -769,6 +798,7 @@ export default function TravelForm() {
                       setCheckedLuggage(newLuggage)
                     }}
                     placeholder="Waga (kg)"
+                    style={{ width: '100px' }}
                   />
                   <button 
                     type="button" 
@@ -781,7 +811,7 @@ export default function TravelForm() {
               ))}
               <button 
                 type="button" 
-                onClick={() => setCheckedLuggage([...checkedLuggage, { weight: '' }])}
+                onClick={() => setCheckedLuggage([...checkedLuggage, { count: '1', weight: '' }])}
                 className={styles.addButton}
               >
                 + Dodaj bagaż rejestrowany
@@ -1290,8 +1320,8 @@ function SummaryStep({ formData, handLuggage, checkedLuggage, beds, multiCity }:
     .map((item: HandLuggage) => `${item.type === 'plecak' ? 'Plecak' : 'Walizka kabinowa'} x${item.count}`)
 
   const checkedLuggageList = checkedLuggage
-    .filter((item: CheckedLuggage) => item.weight)
-    .map((item: CheckedLuggage) => `Walizka ${item.weight}kg`)
+    .filter((item: CheckedLuggage) => item.weight && item.count && parseInt(item.count) > 0)
+    .map((item: CheckedLuggage) => `${item.count} szt. x ${item.weight}kg`)
 
   const specialNeedsList: string[] = []
   if (formData.specialNeedsMain === 'tak') {

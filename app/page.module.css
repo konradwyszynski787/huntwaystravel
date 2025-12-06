@@ -1,10 +1,13 @@
 .hero {
-  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  background-image: url('/Pierwszy kafelek.png');
   color: #fff;
   padding: 120px 20px;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero::before {
@@ -14,8 +17,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.3;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
 }
 
 .heroContent {
@@ -56,15 +59,66 @@
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-.features {
+.heroTiles {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 60px auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.heroTile {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heroTile:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   background: #fff;
 }
+
+.tileIcon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.heroTile h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+
+.heroTile p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
 
 .sectionTitle {
   font-size: 2.5rem;
   text-align: center;
   margin-bottom: 50px;
   color: var(--text-dark);
+}
+
+.howItWorks .sectionTitle,
+.howItWorksPackages .sectionTitle {
+  color: #fff;
 }
 
 .featuresGrid {
@@ -102,8 +156,62 @@
   line-height: 1.6;
 }
 
+.backgroundImage {
+  background-image: url('/Tokyo_v26.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: #fff;
+}
 .howItWorks {
-  background: var(--secondary-color);
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: #fff;
+}
+
+.howItWorks::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.howItWorks > * {
+  position: relative;
+  z-index: 1;
+}
+
+.howItWorksPackages {
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: #fff;
+}
+
+.howItWorksPackages::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.howItWorksPackages > * {
+  position: relative;
+  z-index: 1;
 }
 
 .steps {
@@ -138,8 +246,18 @@
   color: var(--text-dark);
 }
 
+.howItWorks .step h3,
+.howItWorksPackages .step h3 {
+  color: #fff;
+}
+
 .step p {
   color: var(--text-light);
+}
+
+.howItWorks .step p,
+.howItWorksPackages .step p {
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .ctaSection {
@@ -171,6 +289,21 @@
   background: var(--primary-dark);
 }
 
+.page_ctaButton__lcwUc {
+  color: #fff;
+  background: var(--primary-color)!important;
+}
+
+.howItWorksPackages .ctaButton {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.howItWorksPackages .ctaButton:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 10px 25px rgba(255, 152, 0, 0.3);
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -184,7 +317,7 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 80px 20px;
+    padding: 80px 20px 40px;
   }
 
   .heroTitle {
@@ -203,5 +336,59 @@
   .steps {
     grid-template-columns: 1fr;
   }
+
+  .heroTiles {
+    margin-top: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .heroTile {
+    padding: 20px 15px;
+  }
+
+  .tileIcon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+
+  .heroTile h3 {
+    font-size: 1.1rem;
+  }
+
+  .heroTile p {
+    font-size: 0.85rem;
+  }
 }
 
+.ctaButton,
+.heroTile,
+.galleryLink {
+  background: #FF9800 !important;
+  color: #fff !important;
+}
+
+.ctaButton:hover,
+.galleryLink:hover {
+  background: #e68900 !important;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+}
+
+.section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.heroTiles h3, .heroTiles p{
+  color: #fff !important;
+}
