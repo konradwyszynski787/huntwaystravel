@@ -18,14 +18,8 @@ export default function ONasPage() {
             <div className={styles.aboutContent}>
               <h2>Kim jesteśmy?</h2>
               <p>
-                Huntways Travel to nowoczesne biuro podróży, które specjalizuje się w tworzeniu 
-                niezapomnianych doświadczeń podróżniczych. Nasza pasja do odkrywania świata 
-                i dzielenia się nią z klientami sprawia, że każda podróż staje się wyjątkowa.
-              </p>
-              <p>
-                Dzięki naszemu doświadczeniu i sieci partnerów na całym świecie, oferujemy 
-                najlepsze rozwiązania podróżnicze dostosowane do indywidualnych potrzeb 
-                każdego klienta.
+              Jesteśmy ambitnym, lubiącym wyzwania zespołem, który dzięki doświadczeniu w branży lotniczej oraz turystycznej zna rynek i posiada umiejętności tworzenia najlepszych pakietów i wyjazdów za granicę. 
+              Kierujemy się wiedzą, strategią oraz indywidualnymi potrzebami klienta. Nasz zespół dokona wszelkich starań, aby każdy wyjazd był w 100% udany
               </p>
             </div>
           </section>
@@ -61,10 +55,8 @@ export default function ONasPage() {
           <section className={styles.missionSection}>
             <h2 className={styles.sectionTitle}>Nasza misja</h2>
             <p className={styles.missionText}>
-              Naszą misją jest umożliwienie każdemu odkrywania świata w sposób wygodny, 
-              bezpieczny i niezapomniany. Wierzymy, że podróże kształtują nas i otwierają 
-              na nowe możliwości. Dlatego dokładamy wszelkich starań, aby każda podróż 
-              z Huntways Travel była wyjątkowym doświadczeniem.
+            Naszą misją jest dostarczanie spersonalizowanych, szytych na miarę pakietów podróży, niezapomnianych oraz wyjątkowych wyjazdów zorganizowanych, które na długo Państwo zapamiętają. 
+            Staramy się, aby każda usługa spełniała Państwa nawet największe oczekiwania.
             </p>
           </section>
         </div>

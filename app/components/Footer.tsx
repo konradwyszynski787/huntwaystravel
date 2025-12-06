@@ -119,11 +119,6 @@ export default function Footer() {
                 <Link href="/opinie" className={styles.footerLink}>Opinie</Link>
               </nav>
             </div>
-
-            <div className={styles.section}>
-              <h4 className={styles.sectionTitle}>Newsletter</h4>
-              <Newsletter />
-            </div>
           </div>
 
           <div className={styles.bottom}>
