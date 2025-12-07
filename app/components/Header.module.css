@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
+  height: 6em;
 }
 
 .logo {
@@ -30,8 +30,8 @@
 .logoImage {
   height: auto;
   width: auto;
-  max-height: 90px;
-  max-width: 300px;
+  max-height: 17em;
+  max-width: 20em;
   object-fit: contain;
 }
 

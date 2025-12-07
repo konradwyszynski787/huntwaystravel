@@ -24,19 +24,50 @@ export default function Footer() {
     }
 
     try {
-      // Tutaj można dodać endpoint do wysyłki formularza kontaktowego
-      // Na razie tylko symulacja
+      setContactStatus('idle')
+      setContactMessage('')
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactForm),
+      })
+
+      let result: any = null
+      let rawText: string | null = null
+      try {
+        rawText = await response.text()
+        result = rawText ? JSON.parse(rawText) : null
+      } catch (parseError) {
+        console.error('Nieprawidłowa odpowiedź z API /api/contact:', {
+          rawText,
+          parseError,
+        })
+      }
+
+      if (!response.ok) {
+        const errorMsg = result?.details
+          ? `${result?.error || 'Błąd wysyłki formularza kontaktowego'}\n\n${result.details}`
+          : result?.error || 'Wystąpił błąd podczas wysyłania formularza kontaktowego. Spróbuj ponownie.'
+        throw new Error(errorMsg)
+      }
+
       setContactStatus('success')
-      setContactMessage('Dziękujemy za wiadomość! Skontaktujemy się z Tobą wkrótce.')
+      setContactMessage(
+        result?.message || 'Dziękujemy za wiadomość! Sprawdź swoją skrzynkę e-mail – wysłaliśmy potwierdzenie.'
+      )
       setContactForm({ name: '', email: '', message: '' })
-      
+
       setTimeout(() => {
         setContactStatus('idle')
         setContactMessage('')
-      }, 3000)
+      }, 5000)
     } catch (error: any) {
+      console.error('Błąd podczas wysyłania formularza kontaktowego:', error)
       setContactStatus('error')
-      setContactMessage('Wystąpił błąd. Spróbuj ponownie.')
+      setContactMessage(error.message || 'Wystąpił błąd. Spróbuj ponownie.')
     }
   }
 

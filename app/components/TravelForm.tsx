@@ -340,6 +340,7 @@ export default function TravelForm() {
   }
 
   const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100
+  const isSuccess = currentStep === 6
 
   const stepLabels = [
     'Podstawowe informacje',
@@ -355,7 +356,7 @@ export default function TravelForm() {
         {/* Progress Bar */}
         <div className={styles.progressBar}>
           <div 
-            className={styles.progressFill} 
+            className={`${styles.progressFill} ${isSuccess ? styles.progressFillSuccess : ''}`} 
             style={{ width: `${progressPercentage}%` }}
           />
         </div>
@@ -367,7 +368,7 @@ export default function TravelForm() {
               key={step}
               className={`${styles.stepIndicatorItem} ${
                 currentStep === step ? styles.active : ''
-              } ${currentStep > step ? styles.completed : ''}`}
+              } ${currentStep > step ? styles.completed : ''} ${isSuccess ? styles.success : ''}`}
             >
               <div className={styles.stepIndicatorNumber}>{step}</div>
               <div className={styles.stepIndicatorLabel}>
@@ -1307,7 +1308,7 @@ export default function TravelForm() {
         {/* Step 6 - Thank You */}
         {currentStep === 6 && (
           <div className={`${styles.step} ${styles.active}`}>
-            <div className={styles.stepTitle}>Dziękujemy!</div>
+            <div className={styles.thankYouTitle}><h2>Dziękujemy!</h2></div>
             <div className={styles.thankYou}>
               <p>Twoje zgłoszenie zostało wysłane. Skontaktujemy się z Tobą wkrótce!</p>
             </div>

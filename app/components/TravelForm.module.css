@@ -25,6 +25,10 @@
   transition: width 0.3s ease;
 }
 
+.progressFillSuccess {
+  background: #28a745; /* zielony po sukcesie */
+}
+
 /* Step Indicator */
 .stepIndicator {
   display: flex;
@@ -67,6 +71,12 @@
   color: white;
 }
 
+.stepIndicatorItem.success .stepIndicatorNumber {
+  border-color: #28a745;
+  background: #28a745;
+  color: #fff;
+}
+
 .stepIndicatorLabel {
   font-size: 0.85rem;
   color: #999;
@@ -76,6 +86,11 @@
 .stepIndicatorItem.active .stepIndicatorLabel {
   color: var(--primary-color);
   font-weight: 500;
+}
+
+.stepIndicatorItem.success .stepIndicatorLabel {
+  color: #28a745;
+  font-weight: 600;
 }
 
 /* Steps */
@@ -471,6 +486,14 @@
 .thankYou {
   text-align: center;
   padding: 40px 20px;
+}
+
+.thankYouTitle {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  color: var(--primary-color);
 }
 
 .thankYou p {

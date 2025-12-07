@@ -36,12 +36,9 @@ export default function Header() {
           <Link href="/o-nas" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             O nas
           </Link>
-          <Link href="/galeria" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
-            Galeria
-          </Link>
-          <Link href="/opinie" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
+{/*           <Link href="/opinie" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Opinie
-          </Link>
+          </Link> */}
         </nav>
 
         <button 
