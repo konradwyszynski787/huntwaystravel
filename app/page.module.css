@@ -8,6 +8,10 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  min-height: 100vh; /* zawsze pełna wysokość ekranu */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centruj pionowo zawartość (logo + kafelki) */
 }
 
 .hero::before {
@@ -60,14 +64,14 @@
 }
 
 .heroTiles {
-  position: relative;
-  z-index: 1;
-  max-width: 1200px;
-  margin: 60px auto 0;
-  display: grid;
+z-index: 1;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  gap: 3em;
+  max-width: 1200px;
+  margin: 15rem auto 0;
   padding: 0 20px;
+  display: grid;
+  position: relative;
 }
 
 .heroTile {
@@ -165,7 +169,7 @@
   color: #fff;
 }
 .howItWorks {
-  
+  padding: 10em 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -190,7 +194,7 @@
 }
 
 .howItWorksPackages {
-  
+  padding: 10em 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -318,6 +322,7 @@
 @media (max-width: 768px) {
   .hero {
     padding: 80px 20px 40px;
+    min-height: 100vh; /* również na mobile pełny ekran */
   }
 
   .heroTitle {

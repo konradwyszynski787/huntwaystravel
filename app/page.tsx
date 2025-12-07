@@ -15,8 +15,8 @@ export default function Home() {
           <div className={styles.heroContent}>
             {/* <h1 className={styles.heroTitle}>Huntways Travel</h1> */}
             <div className={styles.heroTitle}> <Image 
-            src="/HTP_Logo_Strona_Internetowa.png" 
-            alt="HuntWays Travel Polska" 
+            src="/HTP Logo Strona Internetowa v2.png" 
+            alt="Huntways Travel Polska" 
             width={400} 
             height={110}
             priority
