@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'HuntWays Travel - Twój kreator podróży',
+  title: 'Huntways Travel Polska',
   description: 'Zaplanuj swoją wymarzoną podróż z HuntWays Travel',
 }
 
