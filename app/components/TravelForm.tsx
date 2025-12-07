@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import styles from './TravelForm.module.css'
+import NumberInput from './NumberInput'
 
 interface HandLuggage {
   type: 'plecak' | 'walizka'
@@ -651,21 +652,20 @@ export default function TravelForm() {
         <div className={styles.personsContainer}>
           <div className={styles.personInput}>
             <span>Dorośli</span>
-            <input 
-              type="number" 
-              min="1" 
-              max="10" 
+            <NumberInput
               value={formData.adults}
-              onChange={(e) => {
-                setFormData({...formData, adults: e.target.value})
+              min={1}
+              max={10}
+              required
+              className={validationErrors.adults ? styles.inputError : ''}
+              onChange={(value) => {
+                setFormData({ ...formData, adults: value })
                 if (validationErrors.adults) {
                   const newErrors = { ...validationErrors }
                   delete newErrors.adults
                   setValidationErrors(newErrors)
                 }
               }}
-              required
-              className={validationErrors.adults ? styles.inputError : ''}
             />
             {validationErrors.adults && (
               <span className={styles.errorMessage}>{validationErrors.adults}</span>
@@ -673,20 +673,19 @@ export default function TravelForm() {
           </div>
           <div className={styles.personInput}>
             <span>Dzieci</span>
-            <input 
-              type="number" 
-              min="0" 
-              max="10" 
+            <NumberInput
               value={formData.children}
-              onChange={(e) => {
-                setFormData({...formData, children: e.target.value})
+              min={0}
+              max={10}
+              className={validationErrors.children ? styles.inputError : ''}
+              onChange={(value) => {
+                setFormData({ ...formData, children: value })
                 if (validationErrors.children) {
                   const newErrors = { ...validationErrors }
                   delete newErrors.children
                   setValidationErrors(newErrors)
                 }
               }}
-              className={validationErrors.children ? styles.inputError : ''}
             />
             {validationErrors.children && (
               <span className={styles.errorMessage}>{validationErrors.children}</span>
@@ -694,20 +693,19 @@ export default function TravelForm() {
           </div>
           <div className={styles.personInput}>
             <span>Niemowlęta</span>
-            <input 
-              type="number" 
-              min="0" 
-              max="10" 
+            <NumberInput
               value={formData.infants}
-              onChange={(e) => {
-                setFormData({...formData, infants: e.target.value})
+              min={0}
+              max={10}
+              className={validationErrors.infants ? styles.inputError : ''}
+              onChange={(value) => {
+                setFormData({ ...formData, infants: value })
                 if (validationErrors.infants) {
                   const newErrors = { ...validationErrors }
                   delete newErrors.infants
                   setValidationErrors(newErrors)
                 }
               }}
-              className={validationErrors.infants ? styles.inputError : ''}
             />
             {validationErrors.infants && (
               <span className={styles.errorMessage}>{validationErrors.infants}</span>
