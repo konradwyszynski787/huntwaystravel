@@ -74,7 +74,7 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       {/* Contact Form Section */}
-      <div className={styles.contactSection}>
+      <div id="kontakt" className={styles.contactSection}>
         <div className={styles.container}>
           <div className={styles.contactFormWrapper}>
             <h3 className={styles.contactTitle}>Skontaktuj się z nami</h3>
@@ -144,9 +144,10 @@ export default function Footer() {
               <h4 className={styles.sectionTitle}>Nawigacja</h4>
               <nav className={styles.footerNav}>
                 <Link href="/" className={styles.footerLink}>Strona główna</Link>
+                <Link href="/planowanie-podrozy" className={styles.footerLink}>Planowanie podróży</Link>
                 <Link href="/ebooki" className={styles.footerLink}>e-booki</Link> 
                 {/* <Link href="/pakiety" className={styles.footerLink}>Pakiety</Link> */}
-                <Link href="/formularz" className={styles.footerLink}>Formularz</Link>
+                {/* <Link href="/formularz" className={styles.footerLink}>Formularz</Link> */}
                 <Link href="/o-nas" className={styles.footerLink}>O nas</Link>
                 <Link href="/opinie" className={styles.footerLink}>Opinie</Link>
               </nav>

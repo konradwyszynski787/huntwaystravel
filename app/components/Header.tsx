@@ -27,15 +27,18 @@ export default function Header() {
           <Link href="/" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Strona główna
           </Link>
+          <Link href="/planowanie-podrozy" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
+            Planowanie podróży
+          </Link>
           <Link href="/ebooki" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             e-booki
           </Link>
           {/* <Link href="/pakiety" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Pakiety
           </Link> */}
-          <Link href="/formularz" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
+          {/* <Link href="/formularz" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Formularz
-          </Link>
+          </Link> */}
           <Link href="/o-nas" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             O nas
           </Link>

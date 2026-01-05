@@ -14,6 +14,9 @@
   /* justify-content: center; centruj pionowo zawartość (logo + kafelki)  */
   justify-content: space-between;
   padding: 10em 0;
+
+  background-blend-mode: darken;
+  background-color: #0000005c;
 }
 
 .hero::before {
@@ -213,6 +216,9 @@ margin-bottom: 0.5em;
   background-repeat: no-repeat;
   position: relative;
   color: #fff;
+
+  background-blend-mode: darken;
+  background-color: #0000005c;
 }
 .howItWorks {
   padding: 10em 0;

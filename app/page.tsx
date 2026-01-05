@@ -37,13 +37,13 @@ export default function Home() {
           
           {/* Quick Navigation Tiles */}
             <div className={styles.ctaSection}>
-              <Link href="/formularz" className={styles.heroButton}>
+              <Link href="/planowanie-podrozy" className={styles.heroButton}>
                 Zamów plan podróży
               </Link>
             </div>
 </div>
             <div className={styles.ctaSection}>
-              <Link href="/formularz" className={styles.contactButton}>
+              <Link href="#kontakt" className={styles.contactButton}>
                 Nie Wiesz od czego zacząć? Umów krótką konsultację
               </Link>
             </div>
@@ -51,8 +51,8 @@ export default function Home() {
 <section className={styles.backgroundImage}>
         {/* How It Works - Formularz */}
         <section id="jak-to-dziala-formularz" className={`section ${styles.howItWorks}`}>
+          <h2 className={styles.sectionTitle}>Jak to działa?</h2>
           <div className="container" style={{padding: '7em 0 10em'}}>
-            <h2 className={styles.sectionTitle}>Jak to działa?</h2>
             <div className={styles.steps}>
               <div className={styles.step}>
                 <div className={styles.stepNumber}>1</div>
@@ -71,7 +71,7 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.ctaSection}>
-              <Link href="/formularz" className={styles.ctaButton}>
+              <Link href="/planowanie-podrozy" className={styles.ctaButton}>
                 Zamów plan podróży
               </Link>
             </div>
@@ -89,7 +89,6 @@ export default function Home() {
           </div>
            <div className={styles.heroTiles}>      
             <Link href="/ebooki" className={styles.heroTile}>
-            {/* <div className={styles.tileIcon}><Info size={64} /></div> */}
             <div className={styles.tileContent}>
               <div className={styles.tileIcon}><FileText size={64} /></div>
               <h2>EBOOKI I PORADNIKI</h2>
@@ -103,7 +102,7 @@ export default function Home() {
               <p> Produkty cyfrowe - Natychmiastowy dostęp</p>
             </div>
             </Link>
-            <Link href="/formularz" className={`${styles.heroTile} ${styles.lightText}`}>
+            <Link href="/planowanie-podrozy" className={`${styles.heroTile} ${styles.lightText}`}>
               <div className={`${styles.tileContent} ${styles.lightText}`}>
               <div className={styles.tileIcon}><Briefcase size={64} /></div>
               <h2>Wyjazdy zorganizowane</h2>

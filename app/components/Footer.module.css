@@ -10,6 +10,9 @@
   position: relative;
   padding: 10em 0;
   color: #fff;
+
+  background-blend-mode: darken;
+  background-color: #0000005c;
 }
 
 .contactSection::before {
