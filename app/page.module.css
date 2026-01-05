@@ -11,7 +11,9 @@
   min-height: 100vh; /* zawsze pełna wysokość ekranu */
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centruj pionowo zawartość (logo + kafelki) */
+  /* justify-content: center; centruj pionowo zawartość (logo + kafelki)  */
+  justify-content: space-between;
+  padding: 10em 0;
 }
 
 .hero::before {
@@ -35,7 +37,7 @@
 .heroTitle {
   font-size: 3.5rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 1em;
   animation: fadeInUp 0.8s ease-out;
 }
 
@@ -45,7 +47,28 @@
   opacity: 0.95;
   animation: fadeInUp 0.8s ease-out 0.2s both;
 }
-
+.heroButton {
+color: #fff;
+  background: var(--primary-color);
+  border-radius: 8px;
+  padding: 0.8em 5em;
+  font-size: 1.6em;
+  font-weight: 600;
+  transition: transform .2s, box-shadow .2s;
+  animation: .8s ease-out .4s both fadeInUp;
+  display: inline-block;
+}
+.contactButton {
+  color: #fff;
+  background: var(--primary-color);
+  border-radius: 8px;
+  padding: 0.5em 3em;
+  font-size: 1.3em;
+  font-weight: 600;
+  transition: transform .2s, box-shadow .2s;
+  animation: .8s ease-out .4s both fadeInUp;
+  display: inline-block;
+}
 .ctaButton {
   display: inline-block;
   padding: 15px 40px;
@@ -64,19 +87,16 @@
 }
 
 .heroTiles {
-z-index: 1;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 3em;
-  max-width: 1200px;
-  margin: 15rem auto 0;
-  padding: 0 20px;
-  display: grid;
-  position: relative;
+  max-width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 7em 0 10em;
 }
 
 .heroTile {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 30px 20px;
+  background: #E7D8AF;
+  padding: 2em 1em;
   border-radius: 12px;
   text-decoration: none;
   color: var(--text-dark);
@@ -84,34 +104,60 @@ z-index: 1;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  padding-bottom: 1em;
+  max-width: 25em;
+  min-height: 30em;
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-dark);
 }
 
 .heroTile:hover {
-  transform: translateY(-8px);
+/*   transform: translateY(-8px); */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  background: #fff;
+}
+.lightText {
+  color: #fff !important;
+  background-color: #1E4E5C !important;;
 }
 
 .tileIcon {
   font-size: 3rem;
-  margin-bottom: 15px;
+margin-bottom: 0.5em;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  /* color: var(--text-dark); */
 }
-
+.heroTile h2 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+  /* color: var(--text-dark); */
+  text-align: center;
+}
 .heroTile h3 {
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 8px;
-  color: var(--primary-color);
+  /* color: var(--primary-color); */
 }
-
+.heroTile h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3em;
+  /* color: var(--text-dark); */
+}
 .heroTile p {
   font-size: 0.95rem;
-  color: var(--text-light);
+  /* color: var(--text-dark); */
   margin: 0;
+  text-align: center;
+  font-weight: 600;
 }
-
+.tileContent {
+  /* margin: 1em 0 2em 0; */
+}
 
 .sectionTitle {
   font-size: 2.5rem;
@@ -194,7 +240,7 @@ z-index: 1;
 }
 
 .howItWorksPackages {
-  padding: 10em 0;
+  /* padding: 10em 0; */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -274,11 +320,18 @@ z-index: 1;
 }
 
 .sectionSubtitle {
-  font-size: 1.1rem;
-  color: var(--text-light);
-  margin-bottom: 30px;
+  font-size: 1.5rem;
+  margin-bottom: 3em;
+  text-align: center;
 }
+.sectionNote {
+  font-size: 1rem;
+  margin-bottom: 3em;
+  text-align: center;
 
+  padding-bottom: 4.5em;
+  margin: 0;
+}
 .galleryLink {
   display: inline-block;
   padding: 12px 30px;
@@ -341,13 +394,6 @@ z-index: 1;
   .steps {
     grid-template-columns: 1fr;
   }
-
-  .heroTiles {
-    margin-top: 40px;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-
   .heroTile {
     padding: 20px 15px;
   }
@@ -356,7 +402,6 @@ z-index: 1;
     font-size: 2.5rem;
     margin-bottom: 10px;
   }
-
   .heroTile h3 {
     font-size: 1.1rem;
   }
@@ -367,7 +412,6 @@ z-index: 1;
 }
 
 .ctaButton,
-.heroTile,
 .galleryLink {
   background: #FF9800 !important;
   color: #fff !important;
@@ -395,5 +439,5 @@ z-index: 1;
 }
 
 .heroTiles h3, .heroTiles p{
-  color: #fff !important;
+ /*  color: #fff !important; */
 }

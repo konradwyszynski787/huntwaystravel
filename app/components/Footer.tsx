@@ -144,10 +144,41 @@ export default function Footer() {
               <h4 className={styles.sectionTitle}>Nawigacja</h4>
               <nav className={styles.footerNav}>
                 <Link href="/" className={styles.footerLink}>Strona główna</Link>
-                <Link href="/pakiety" className={styles.footerLink}>Pakiety</Link>
+                <Link href="/ebooki" className={styles.footerLink}>e-booki</Link> 
+                {/* <Link href="/pakiety" className={styles.footerLink}>Pakiety</Link> */}
                 <Link href="/formularz" className={styles.footerLink}>Formularz</Link>
                 <Link href="/o-nas" className={styles.footerLink}>O nas</Link>
                 <Link href="/opinie" className={styles.footerLink}>Opinie</Link>
+              </nav>
+            </div>
+
+            <div className={styles.section}>
+              <h4 className={styles.sectionTitle}>Dokumenty</h4>
+              <nav className={styles.footerNav}>
+                <Link
+                  href="/docs/Cookies.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.footerLink}
+                >
+                  Polityka cookies (PDF)
+                </Link>
+                <Link
+                  href="/docs/Regulamin.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.footerLink}
+                >
+                  Regulamin (PDF)
+                </Link>
+                <Link
+                  href="/docs/Rodo.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.footerLink}
+                >
+                  RODO (PDF)
+                </Link>
               </nav>
             </div>
           </div>

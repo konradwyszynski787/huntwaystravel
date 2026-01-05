@@ -6,58 +6,52 @@ export default function OpiniePage() {
   const reviews = [
     {
       id: 1,
-      name: 'Anna Kowalska',
-      location: 'Warszawa',
+      name: 'Anna',
+      plan: 'CityHunt',
       rating: 5,
-      date: '2024-01-15',
-      text: 'Fantastyczna obsługa! Wszystko zostało zorganizowane perfekcyjnie. Hotel był wspaniały, loty punktualne. Polecam z całego serca!',
-      trip: 'Grecja - Kreta'
+      /* date: '2024-02-20', */
+      text: 'Plan był bardzo przejrzysty i logiczny. Wszystko jasno rozpisane, bez chaosu i zbędnych informacji. Dzięki temu przygotowania do wyjazdu były spokojne i uporządkowane.'
     },
     {
       id: 2,
-      name: 'Jan Nowak',
-      location: 'Kraków',
+      name: 'Jan',
+      plan: 'MultiHunt',
       rating: 5,
-      date: '2024-01-10',
-      text: 'Profesjonalna pomoc w planowaniu podróży. Otrzymaliśmy dokładnie to, czego potrzebowaliśmy. Dziękujemy za wspaniałą przygodę!',
-      trip: 'Hiszpania - Majorka'
+      /* date: '2024-02-18', */
+      text: 'Profesjonalne podejście do planowania. Otrzymaliśmy konkretne rekomendacje i sensowne alternatywy, które bardzo ułatwiły podjęcie decyzji.'
     },
     {
       id: 3,
-      name: 'Maria Wiśniewska',
-      location: 'Gdańsk',
+      name: 'Maria',
+      plan: 'MultiHunt',
       rating: 5,
-      date: '2024-01-05',
-      text: 'Bardzo zadowolona z usługi. Formularz jest intuicyjny, a obsługa klienta na najwyższym poziomie. Na pewno skorzystam ponownie!',
-      trip: 'Włochy - Rzym'
+      /* date: '2024-02-15', */
+      text: 'Formularz był intuicyjny, a gotowy plan czytelny i dopasowany do naszych oczekiwań. Wszystko miało sens i było dobrze przemyślane.'
     },
     {
       id: 4,
-      name: 'Piotr Zieliński',
-      location: 'Wrocław',
+      name: 'Piotr',
+      plan: 'Adventure',
       rating: 5,
-      date: '2023-12-28',
-      text: 'Świetna organizacja wyjazdu. Wszystko przebiegło bez problemów. Szczególnie doceniam indywidualne podejście do potrzeb klienta.',
-      trip: 'Portugalia - Lizbona'
+      /* date: '2024-02-12', */
+      text: 'Doceniam spokojne i rzeczowe podejście. Bez presji, bez sprzedażowych schematów — same konkrety. Plan pomógł uniknąć wielu nietrafionych decyzji.'
     },
     {
       id: 5,
-      name: 'Katarzyna Lewandowska',
-      location: 'Poznań',
+      name: 'Katarzyna',
+      plan: 'Explorer',
       rating: 5,
-      date: '2023-12-20',
-      text: 'Polecam wszystkim! Formularz pozwala na dokładne określenie swoich potrzeb, a oferta była idealnie dopasowana do naszych wymagań.',
-      trip: 'Chorwacja - Dubrownik'
+      /* date: '2024-02-10', */
+      text: 'Bardzo dobrze uporządkowane informacje i praktyczne wskazówki. Dzięki temu czuliśmy się pewnie jeszcze przed wyjazdem. Cały proces był jasny i przejrzysty.'
     },
     {
       id: 6,
-      name: 'Tomasz Szymański',
-      location: 'Łódź',
+      name: 'Tomasz',
+      plan: 'Explorer Plus',
       rating: 5,
-      date: '2023-12-15',
-      text: 'Profesjonalizm i zaangażowanie na każdym etapie. Podróż była wspaniała, a wszystko zostało zaplanowane w najmniejszych szczegółach.',
-      trip: 'Turcja - Antalya'
-    },
+      /* date: '2024-02-08', */
+      text: 'Profesjonalne doradztwo i przemyślany plan. Widać doświadczenie i realną wiedzę. Wszystko przygotowane w sposób logiczny i zrozumiały.'
+    }
   ]
 
   return (
@@ -80,7 +74,6 @@ export default function OpiniePage() {
                     </div>
                     <div>
                       <h3>{review.name}</h3>
-                      <p className={styles.location}>{review.location}</p>
                     </div>
                   </div>
                   <div className={styles.reviewMeta}>
@@ -91,11 +84,11 @@ export default function OpiniePage() {
                         </span>
                       ))}
                     </div>
-                    <p className={styles.date}>{new Date(review.date).toLocaleDateString('pl-PL')}</p>
+                    {/* <p className={styles.date}>{new Date(review.date).toLocaleDateString('pl-PL')}</p> */}
                   </div>
                 </div>
                 <div className={styles.trip}>
-                  <strong>Podróż:</strong> {review.trip}
+                  <strong>Plan:</strong> {review.plan}
                 </div>
                 <p className={styles.reviewText}>{review.text}</p>
               </div>
