@@ -30,6 +30,9 @@ export default function Header() {
           <Link href="/planowanie-podrozy" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Planowanie podróży
           </Link>
+          <Link href="/wyjazdy" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
+            Wyjazdy zorganizowane
+          </Link>
           <Link href="/ebooki" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             e-booki
           </Link>

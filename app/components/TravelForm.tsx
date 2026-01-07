@@ -1188,7 +1188,7 @@ export default function TravelForm() {
         <div className={`${styles.step} ${currentStep === 4 ? styles.active : ''}`}>
           <div className={styles.stepTitle}>4. Dodatki</div>
           
-          <div className={styles.formRow}>
+          {/* <div className={styles.formRow}>
             <label>Ubezpieczenie turystyczne:</label>
             <select 
               value={formData.insurance}
@@ -1197,9 +1197,9 @@ export default function TravelForm() {
               <option value="nie">Nie</option>
               <option value="tak">Tak</option>
             </select>
-          </div>
+          </div> */}
 
-          <div className={styles.formRow}>
+         {/*  <div className={styles.formRow}>
             <label>Czy chcesz, aby za dodatkową opłatą zakupić bilety wstępu (na atrakcje)?</label>
             <select 
               value={formData.tickets}
@@ -1208,7 +1208,7 @@ export default function TravelForm() {
               <option value="nie">Nie</option>
               <option value="tak">Tak</option>
             </select>
-          </div>
+          </div> */}
 
           <div className={styles.formRow}>
             <label>Podaj budżet jakim dysponujesz:</label>

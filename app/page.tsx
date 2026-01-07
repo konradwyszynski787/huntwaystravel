@@ -102,7 +102,7 @@ export default function Home() {
               <p> Produkty cyfrowe - Natychmiastowy dostęp</p>
             </div>
             </Link>
-            <Link href="/planowanie-podrozy" className={`${styles.heroTile} ${styles.lightText}`}>
+            <Link href="/wyjazdy" className={`${styles.heroTile} ${styles.lightText}`}>
               <div className={`${styles.tileContent} ${styles.lightText}`}>
               <div className={styles.tileIcon}><Briefcase size={64} /></div>
               <h2>Wyjazdy zorganizowane</h2>
@@ -113,7 +113,7 @@ export default function Home() {
               <h4> - organizatorem jest touroperator</h4>
             </div>
             <div>
-              <p> Produkty cyfrowe - Natychmiastowy dostęp</p>
+              <p></p>
             </div>
             </Link>
           </div>

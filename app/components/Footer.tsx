@@ -136,7 +136,9 @@ export default function Footer() {
             <div className={styles.section}>
               <h3 className={styles.title}>Huntways Travel</h3>
               <p className={styles.description}>
-                Twój kreator wymarzonych podróży. Planujemy, rezerwujemy, realizujemy.
+                Twój kreator wymarzonych podróży. 
+                <br />
+                Planujemy i realizujemy.
               </p>
             </div>
 
@@ -145,6 +147,7 @@ export default function Footer() {
               <nav className={styles.footerNav}>
                 <Link href="/" className={styles.footerLink}>Strona główna</Link>
                 <Link href="/planowanie-podrozy" className={styles.footerLink}>Planowanie podróży</Link>
+                <Link href="/wyjazdy" className={styles.footerLink}>Wyjazdy zorganizowane</Link>
                 <Link href="/ebooki" className={styles.footerLink}>e-booki</Link> 
                 {/* <Link href="/pakiety" className={styles.footerLink}>Pakiety</Link> */}
                 {/* <Link href="/formularz" className={styles.footerLink}>Formularz</Link> */}
