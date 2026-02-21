@@ -1,7 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+import BookingForm from '../../components/BookingForm'
 import styles from './page.module.css'
 
 const usaPackages = [
@@ -104,7 +106,9 @@ const usaPackages = [
 ]
 
 export default function USAPackagesPage() {
- return (
+  const [showBookingForm, setShowBookingForm] = useState<string | null>(null)
+
+  return (
     <>
       <Header />
       <main className={styles.main}>
@@ -148,7 +152,7 @@ export default function USAPackagesPage() {
                       <span className={styles.priceAmount}>{pkg.price}</span>
                       <span className={styles.priceCurrency}>{pkg.currency}</span>
                     </div>
-                    <button className={styles.contactButton}>
+                    <button className={styles.contactButton} onClick={() => setShowBookingForm(pkg.title)}>
                       Zapisz się
                     </button>
                     <button className={styles.contactButton}>
@@ -162,6 +166,13 @@ export default function USAPackagesPage() {
         </div>
       </main>
       <Footer />
+      
+      {showBookingForm && (
+        <BookingForm 
+          packageName={showBookingForm} 
+          onClose={() => setShowBookingForm(null)} 
+        />
+      )}
     </>
   )
 }

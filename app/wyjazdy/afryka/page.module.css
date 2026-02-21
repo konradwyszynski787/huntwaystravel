@@ -119,7 +119,8 @@
   color: var(--text-light);
   line-height: 1.6;
   margin-bottom: 20px;
-  max-height: 120px;
+  min-height: 10em;
+  max-height: 10em;
   overflow-y: auto;
   padding-right: 8px;
 }
@@ -129,7 +130,7 @@
   padding-top: 20px;
   border-top: 2px solid var(--secondary-color);
 
-  max-height: 120px;
+  max-height: 16em;
   overflow-y: auto;
 }
 
